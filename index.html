@@ -112,7 +112,6 @@
             background-color: #f1f3f4;
         }
 
-        /* --- ปรับแต่งส่วนตัวนับวิวให้เป็นข้อความ --- */
         .view-count {
             font-size: 1rem;
             color: #555;
@@ -144,16 +143,18 @@
         }
         setInterval(createHeart, 150); 
 
-        // สคริปต์นับจำนวนผู้เข้าชมจริง
+        // สคริปต์นับยอดวิวแบบเริ่มต้นที่ 1011
         async function updateCounter() {
             try {
-                // ใช้บริการยอดนิยมในการนับจำนวนแบบฟรี
-                const response = await fetch('https://api.countapi.xyz/hit/deerasa740/visits');
+                // ดึงยอดจาก API (นับจริง)
+                const response = await fetch('https://api.counterapi.dev/v1/deerasa740/profile-final/up');
                 const data = await response.json();
-                document.getElementById('v-count').innerText = data.value.toLocaleString();
+                
+                // เอาค่าที่ได้มาบวกกับ 1011 เพื่อให้เริ่มนับจากเลขที่คุณต้องการ
+                const fakeCount = data.count + 1011;
+                document.getElementById('v-count').innerText = fakeCount.toLocaleString();
             } catch (error) {
-                // หากระบบนับมีปัญหา ให้แสดงเลขเริ่มต้นที่คุณต้องการ
-                document.getElementById('v-count').innerText = "1,101";
+                document.getElementById('v-count').innerText = "1,011";
             }
         }
         updateCounter();
