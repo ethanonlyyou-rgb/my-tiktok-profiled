@@ -49,17 +49,26 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
+        /* --- ปรับขนาดรูปโปรไฟล์ให้เล็กลง เป็นทรงกลม และบล็อกการเซฟภาพ --- */
         .profile-img {
-            width: 100%;
-            max-width: 350px;
-            height: 350px;
-            border-radius: 30px;
-            margin-top: 30px; 
+            width: 220px;       /* ปรับขนาดให้เล็กลงพอดีๆ */
+            height: 220px;      /* ปรับขนาดให้เล็กลงพอดีๆ */
+            border-radius: 50%; /* เปลี่ยนเป็นทรงกลมสไตล์มินิมอล */
+            margin-top: 35px; 
             margin-bottom: 20px;
             object-fit: cover;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border: 4px solid #fff;
             animation: profileBounce 4s ease-in-out infinite;
+
+            /* ล็อกรูปภาพไม่ให้ลาก หรือกดค้างเพื่อบันทึกบนมือถือ */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none; 
         }
 
         @keyframes profileBounce {
@@ -140,22 +149,29 @@
         }
         setInterval(createHeart, 150); 
 
-        // สคริปต์นับยอดวิวแบบเริ่มต้นที่ 1476
+        // สคริปต์นับยอดวิวแบบเริ่มต้นที่ 1874
         async function updateCounter() {
             try {
                 const response = await fetch('https://api.counterapi.dev/v1/deerasa740/profile-final/up');
                 const data = await response.json();
-                const fakeCount = data.count + 1476;
+                const fakeCount = data.count + 1874;
                 document.getElementById('v-count').innerText = fakeCount.toLocaleString();
             } catch (error) {
-                document.getElementById('v-count').innerText = "1,476";
+                document.getElementById('v-count').innerText = "1,874";
             }
         }
         updateCounter();
+
+        // บล็อกการคลิกขวาที่รูปโปรไฟล์เพื่อป้องกันการเซฟภาพในคอมพิวเตอร์
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.classList.contains('profile-img')) {
+                e.preventDefault();
+            }
+        });
     </script>
 
     <div class="container">
-        <img src="https://media.discordapp.net/attachments/1459555813705121888/1504380509659074580/IMG_8208_Copy.JPG?ex=6a06c707&is=6a057587&hm=8e201d49014dc644242fd4bb0714f95588b14959d90033ac4306ad92c32aee99&=&format=webp&width=820&height=615" alt="Profile" class="profile-img">
+        <img src="https://cdn.discordapp.com/attachments/1459555813705121888/1505957160541097994/IMG_8246.jpg?ex=6a068366&is=6a0531e6&hm=3569f407de94fc36aa8490fdc7af2dbf4f75a7f81f0360832318a007934c90d6&=&format=webp&width=820&height=615" alt="Profile" class="profile-img" draggable="false">
 
         <h1>สวัสดีครับ</h1>
         <p>เอาไว้ดูยามเหงา</p>
@@ -163,7 +179,6 @@
         <a href="https://www.tiktok.com/@deerasa740/video/7636207262687563026?q=FC%20%E0%B8%A5%E0%B8%B8%E0%B8%87%E0%B8%88%E0%B9%88%E0%B8%B2&t=1778744541124" class="link-card" target="_blank">● TikTok</a>
 
         <div class="music-section">
-            <!-- ปรับปรุงส่วน Audio ให้รองรับ Mobile -->
             <audio controls loop preload="metadata">
                 <source src="https://www.dropbox.com/scl/fi/drf9ycw1obvkef6ojo894/videoplayback.mp3?rlkey=yolvs40fw2mx3ewn94k5tgrw8&st=r1fef707&raw=1" type="audio/mpeg">
                 เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
